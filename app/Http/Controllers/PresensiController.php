@@ -39,9 +39,15 @@ class PresensiController extends Controller
         ->orderBy('jam_in')
         ->get();
 
-        $rekapizin = DB::table('pengajuan_izin');
+        $rekapizin = DB::table('pengajuan_izin')
+        ->selectRaw('SUM(IF(status="i",1,0)) as jmlhizin, SUM(IF(status="s",1,0)) as jmlhsakit')
+        ->where('nik', $nik)
+        ->where('status_approved', 1)
+        ->whereRaw('MONTH(tanggal)="'.$bulanini.'"')
+        ->whereRaw('YEAR(tanggal)="'.$tahunini.'"')
+        ->first();
 
-        return view('index', compact('presensi_hariini', 'historibulanini', 'namabulan', 'bulanini', 'tahunini','rekappresensi','leaderboard'));
+        return view('index', compact('presensi_hariini', 'historibulanini', 'namabulan', 'bulanini', 'tahunini','rekappresensi','leaderboard', 'rekapizin'));
     }
 
     public function create()

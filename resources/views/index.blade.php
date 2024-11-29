@@ -27,7 +27,7 @@
                     <div class="list-menu">
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="green" style="font-size: 40px;">
+                                <a href="{{ route('presensi.edit-profile') }}" class="green" style="font-size: 40px;">
                                     <ion-icon name="person-sharp"></ion-icon>
                                 </a>
                             </div>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="danger" style="font-size: 40px;">
+                                <a href="{{ route('presensi.izin') }}" class="danger" style="font-size: 40px;">
                                     <ion-icon name="calendar-number"></ion-icon>
                                 </a>
                             </div>
@@ -139,7 +139,7 @@
                         <div class="card">
                             <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
                                 <span class="badge bg-danger"
-                                    style="position: absolute; top:3px; right: 10px; font-size: 0.6rem; z-index:999">0</span>
+                                    style="position: absolute; top:3px; right: 10px; font-size: 0.6rem; z-index:999">{{ $rekapizin->jmlhizin }}</span>
                                 <ion-icon name="newspaper-outline" style="font-size: 1.6rem"
                                     class="text-success mb-1"></ion-icon>
                                 <br>
@@ -151,7 +151,7 @@
                         <div class="card">
                             <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
                                 <span class="badge bg-danger"
-                                    style="position: absolute; top:3px; right: 10px; font-size: 0.6rem; z-index:999">0</span>
+                                    style="position: absolute; top:3px; right: 10px; font-size: 0.6rem; z-index:999">{{ $rekapizin->jmlhsakit }}</span>
                                 <ion-icon name="medkit-outline" style="font-size: 1.6rem"
                                     class="text-warning mb-1"></ion-icon>
                                 <br>
@@ -193,9 +193,6 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel">
                         <ul class="listview image-listview">
                             @foreach ($historibulanini as $b)
-                                {{-- @php
-                                $path = Storage::url('uploads/absensi/'.$b->foto_in);
-                            @endphp --}}
                                 <li>
                                     <div class="item">
                                         <div class="icon-box bg-primary">
