@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PresensiController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,14 @@ Route::middleware(['guest:karyawan'])->group(function(){
     Route::post('proses-login', [AuthController::class, 'prosesLogin']);
 });
 
+Route::middleware(['guest'])->group(function(){
+    Route::get('/panel', function () {
+        return view('auth.loginadmin');
+    })->name('loginadmin');
+
+    Route::post('proses-login', [AuthController::class, 'prosesLogin']);
+});
+
 Route::middleware(['auth:karyawan'])->group(function(){
     Route::get('dashboard', [PresensiController::class, 'index'])->name('dashboard');
     Route::get('presensi/create', [PresensiController::class, 'create'])->name('presensi.create');
@@ -42,3 +51,5 @@ Route::middleware(['auth:karyawan'])->group(function(){
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 });
+
+Route::get('dashboardadmin', [DashboardController::class, 'index']);
